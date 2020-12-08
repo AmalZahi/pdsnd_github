@@ -226,6 +226,7 @@ def main():
         # asking user if he/she want to restart the program
         restart = input('\nWould you like to restart? Enter yes to continue, any other entry quits the program: \n')
         if restart.lower() != 'yes':
+            # printing thanks message
             print('Thank you')
             break
 
