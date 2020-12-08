@@ -58,7 +58,7 @@ def get_filters():
 
 
     print('-'*40)
-    return city, month, day
+    return city, month, day, name
 
 #------------------------------------------------------------------
 
@@ -224,7 +224,7 @@ def raw_data(df):
 
 def main():
     while True:
-        city, month, day= get_filters()
+        city, month, day, name = get_filters()
         df = load_data(city, month, day)
 
         time_stats(df)
