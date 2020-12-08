@@ -16,7 +16,16 @@ def get_filters():
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
-    print('Hello! Let\'s explore some US bikeshare data!')
+    # reading user name
+    while True:
+        name = input("Please enter your name")
+        if  name.isalpha():
+            print('Hello {}! Let\'s explore some US bikeshare data!'.format(name))
+            break
+
+        else:
+            print('please use only letters, try again')
+            continue
 
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
@@ -49,7 +58,7 @@ def get_filters():
 
 
     print('-'*40)
-    return city, month, day
+    return city, month, day, name
 
 #------------------------------------------------------------------
 
@@ -152,12 +161,14 @@ def trip_duration_stats(df):
 
     # TO DO: display total travel time
     total_travel_time = df['Trip Duration'].sum()
-    print("The total travel time is {}".format(total_travel_time))
+    total_timedelta = str(dt.timedelta(seconds=int(total_travel_time)))
+    print("The total travel time is {}".format(total_timedelta))
 
 
     # TO DO: display mean travel time
     mean_travel_time = df['Trip Duration'].mean()
-    print("The total mean time is {}".format(mean_travel_time) )
+    mean_timedelta = str(dt.timedelta(seconds=int(mean_travel_time)))
+    print("The total mean time is {}".format(mean_timedelta))
 
 
 
@@ -215,7 +226,7 @@ def raw_data(df):
 
 def main():
     while True:
-        city, month, day= get_filters()
+        city, month, day, name = get_filters()
         df = load_data(city, month, day)
 
         time_stats(df)
