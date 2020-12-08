@@ -1,7 +1,7 @@
 import time
 import pandas as pd
 import numpy as np
-from colorama import Fore, Style 
+from colorama import Fore, Style
 
 CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
@@ -16,8 +16,17 @@ def get_filters():
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
-    print('Hello! Let\'s explore some US bikeshare data!')
-    
+    # reading user name
+    while True:
+        name = input("Please enter your name")
+        if  name.isalpha():
+            print('Hello {}! Let\'s explore some US bikeshare data!'.format(name))
+            break
+
+        else:
+            print('please use only letters, try again')
+            continue
+
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
         city = input('which city would you like to explore? (chicago, new york city, washington): ').lower()
@@ -26,20 +35,20 @@ def get_filters():
             continue
         else:
             break
-            
-    
+
+
     # TO DO: get user input for month (all, january, february, ... , june)
-    while True:        
+    while True:
         month = input("\nWould you like to filter the data by a specific month? if yes, please choose one ( January, February, March, April, May, June), if no enter 'all' please: ").lower()
         if month not in ['january', 'february', 'march', 'april', 'may', 'june', 'all']:
             print(Fore.RED + '**Please enter a valid input, try again.**\n' + Style.RESET_ALL)
             continue
         else:
             break
-   
+
 
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
-    while True:        
+    while True:
         day = input("\nWould you like to filter the data by a specific day? if yes, please choose one ( Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday), if no enter 'all' please: ").lower()
         if day not in ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'all']:
             print(Fore.RED + '**Please enter a valid input, try again.**\n' + Style.RESET_ALL)
@@ -47,7 +56,7 @@ def get_filters():
         else:
             break
 
-            
+
     print('-'*40)
     return city, month, day
 
@@ -64,10 +73,10 @@ def load_data(city, month, day):
     Returns:
         df - Pandas DataFrame containing city data filtered by month and day
     """
-    
+
     # load data file into a dataframe
     df = pd.read_csv(CITY_DATA[city])
-    
+
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
@@ -88,7 +97,7 @@ def load_data(city, month, day):
     if day != 'all':
         # filter by day of week to create the new dataframe
         df = df[df['day_of_week'] == day.title()]
-        
+
 
     return df
 
@@ -109,7 +118,7 @@ def time_stats(df):
     popular_day = df['day_of_week'].mode()[0]
     print('Most Common day of week: {}'.format(popular_day))
 
-    
+
     # TO DO: display the most common start hour
     df['Start Hour'] = df['Start Time'].dt.hour
     popular_start_hour = df['Start Hour'].mode()[0]
@@ -154,7 +163,7 @@ def trip_duration_stats(df):
     total_travel_time = df['Trip Duration'].sum()
     print("The total travel time is {}".format(total_travel_time))
 
-   
+
     # TO DO: display mean travel time
     mean_travel_time = df['Trip Duration'].mean()
     print("The total mean time is {}".format(mean_travel_time) )
@@ -176,9 +185,9 @@ def user_stats(df, city):
     user_types = df['User Type'].value_counts()
     print("The Types of Users Bikeshare Has: \n{}".format(user_types),'\n')
     print('*'*10)
-    
+
     if city != 'washington':
-        
+
         # TO DO: Display counts of gender
         users_gender = df['Gender'].value_counts()
         print("The Count of Genders: \n{}".format(users_gender), '\n')
@@ -188,12 +197,12 @@ def user_stats(df, city):
         earlyiest_year = int(df['Birth Year'].min())
         recent_year = int(df['Birth Year'].max())
         common_year = int(df['Birth Year'].mode()[0])
-        
+
         print("The earliest year of birth is: {} ".format(earlyiest_year), '\n')
         print("The most recent year of birth is: {} ".format(recent_year), '\n')
         print("The most common year of birth is: {} ".format(common_year), '\n')
 
-        
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 #---------------------------------------------------------------------------------------------------
@@ -232,4 +241,3 @@ def main():
 
 if __name__ == "__main__":
 	main()
-    
