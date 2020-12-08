@@ -1,15 +1,14 @@
 ### Date created
-Include the date you created this project and README file.
+07-DEC-2020
 
 ### Project Title
-Replace the Project Title
+Programming for Data Science Nanodegree Program - Version Control Project
 
 ### Description
-Describe what your project is about and what it does
+In this project, I will create a GitHub repository and my local repository. I will work on a repo for my BikeShare project, making multiple branches, making edits to files on those branches, and then I will commit the changes to my remote repository.
 
 ### Files used
-Include the files used
+BikeShare.py
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
-
+Credit to my session leader Mr. Islam Hesham for his support and guidance.
